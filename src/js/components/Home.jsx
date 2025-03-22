@@ -7,28 +7,36 @@ const Home = () => {
 	const [tasks, setTasks] = useState(["Exercise for 1 hour", "Practice more Javascript", "Journal"]);
 	const [userInput, setUserInput] = useState("");
 
-	// item = dressing
 	const addToList = (e) => {
 		e.preventDefault();
 		console.log(e)
 		setTasks([...tasks, userInput]);
 	}
 
-	const removeTask = (i) => {
-		const newArray = tasks.filter((task, index) => {}) 
+	const removeTask = (IndexInput) => {
+		const newArray = tasks.filter((task, index) => {
+			if (IndexInput != index)
+				return (
+					task 
+				)
+		})
+
+		setTasks(newArray)
 
 	}
+
 	return (
 		<div className="text-center">
 
-			<input value={userInput} onChange={(e) => {setUserInput(e.target.value)}}></input>
+			<input value={userInput} onChange={(e) => { setUserInput(e.target.value) }}></input>
 			<button onClick={(e) => addToList(e)}>Add To List</button>
 
 			{/* we have an array of tasks and we want to display as a list on our page*/}
 			<ul>
 				{tasks?.map((task, index) => {
-					return <li key={index}>{task}</li>}
-	)}
+					return <li key={index}>{task}<span onClick={()=>removeTask(index)}> X</span></li>
+				}
+				)}
 			</ul>
 		</div>
 	);
